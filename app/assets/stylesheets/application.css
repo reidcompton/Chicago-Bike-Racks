@@ -1,0 +1,92 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  margin:0;
+  padding:0;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+	width:100%;
+	height:100%;
+	color:#333;
+}
+
+a {
+	cursor:pointer;
+}
+
+#map {
+	width:100%;
+	height:100%;
+	border:none;
+	position:fixed;
+	z-index:0;
+}
+
+#map-overwrite {
+	width:100%;
+	height:100%;
+	border:none;
+	position:fixed;
+	z-index:1;
+}
+
+#input-box {
+    box-shadow: 0 0 30px #333;
+    height: 80px;
+    left: 10%;
+    margin-top: -35px;
+    position: absolute;
+    top: 50%;
+    width: 80%;
+    z-index:2;
+    transition:all 0.5s linear;
+}
+
+#input-box.active {
+    margin-top: 0;
+    top: 10px;
+    transform: scale(0.4);
+}
+
+#gps {
+    left: 20px;
+    position: absolute;
+    top: 20px;
+    width: 40px;
+}
+
+#search {
+	position: absolute;
+	width:40px;
+	top:20px;
+	right:20px;
+}
+
+#address {
+    border: medium none;
+    font-size: 40px;
+    height: 100%;
+    padding: 10px 80px;
+    width:100%;
+}
