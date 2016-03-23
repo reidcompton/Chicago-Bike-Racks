@@ -1,0 +1,69 @@
+I"	(function() {
+  $(document).ready(function() {
+    var bindReactive, getBikes, initGoogleMaps, mapMarkers, plotBikeRacks, queryDataPortal;
+    $('#LocationSubmit').off('click').on('click', function() {
+      return getBikes();
+    });
+    getBikes = function() {
+      if (navigator.geolocation) {
+        return navigator.geolocation.getCurrentPosition(plotBikeRacks);
+      } else {
+        return alert('Geolocation is not supported by this browser.');
+      }
+    };
+    plotBikeRacks = function(position) {
+      var latitude, longitude;
+      $('#input-box').addClass('active');
+      bindReactive();
+      latitude = parseFloat(position.coords.latitude.toFixed(6));
+      longitude = parseFloat(position.coords.longitude.toFixed(6));
+      return queryDataPortal(latitude, longitude);
+    };
+    queryDataPortal = function(latitude, longitude) {
+      return $.ajax({
+        url: '/home/getBikes',
+        data: {
+          lat: latitude,
+          long: longitude
+        },
+        success: function(data) {
+          return initGoogleMaps(latitude, longitude, data);
+        }
+      });
+    };
+    initGoogleMaps = function(latitude, longitude, data) {
+      var map, mapOptions;
+      mapOptions = {
+        center: new google.maps.LatLng(latitude, longitude),
+        zoom: 17,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById('map-overwrite'), mapOptions);
+      return mapMarkers(longitude, latitude, data, map, true);
+    };
+    mapMarkers = function(longitude, latitude, data, map) {
+      var marker, markerBikes, markerMe, me;
+      me = new google.maps.Marker({
+        position: new google.maps.LatLng(latitude, longitude),
+        title: 'My Location'
+      });
+      markerMe = me.setMap(map);
+      $(data).each(function() {});
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(this.sub_col_location_latitude, this.sub_col_location_longitude),
+        title: 'Bike Rack',
+        icon: '/bike.png'
+      });
+      return markerBikes = marker.setMap(map);
+    };
+    return bindReactive = function() {
+      return $('#input-box.active').off('click').on('click', function() {
+        return $('#input-box.active').removeClass('active');
+      });
+    };
+  });
+
+  return;
+
+}).call(this);
+:ET

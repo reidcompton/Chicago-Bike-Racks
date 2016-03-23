@@ -1,0 +1,7 @@
+I"M(function() {
+  $.ajax({
+    url: 'home/getBikes'
+  });
+
+}).call(this);
+:ET

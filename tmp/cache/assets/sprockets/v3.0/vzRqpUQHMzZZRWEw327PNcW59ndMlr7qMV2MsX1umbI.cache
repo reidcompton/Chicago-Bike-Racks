@@ -1,0 +1,36 @@
+I"x(function() {
+  var map, mapOptions, plotBikeRacks, queryDataPortal;
+
+  plotBikeRacks = function(position) {
+    var latitude, longitude;
+    latitude = parseFloat(position.coords.latitude.toFixed(6));
+    longitude = parseFloat(position.coords.longitude.toFixed(6));
+    queryDataPortal(latitude, longitude);
+  };
+
+  queryDataPortal = function(latitude, longitude) {
+    $.ajax({
+      url: 'home/getBikes',
+      data: {
+        lat: latitude,
+        long: longitude
+      }
+    });
+  };
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(plotBikeRacks);
+  } else {
+    alert('Geolocation is not supported by this browser.');
+  }
+
+  mapOptions = {
+    center: new google.maps.LatLng(latitude, longitude),
+    zoom: 17,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+
+  map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+}).call(this);
+:ET
