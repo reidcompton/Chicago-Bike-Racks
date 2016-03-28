@@ -1,0 +1,101 @@
+I"F(function() {
+  $(document).ready(function() {
+    var bindReactive, geoCodeAddress, getBikesByAddress, getBikesByLatLong, initGoogleMaps, mapMarkers, plotBikeRacks, queryClientSideDataPortal, queryDataPortal;
+    $('#LocationSubmit').off('click').on('click', function() {
+      return getBikesByLatLong();
+    });
+    $('#AddressSubmit').off('click').on('click', function() {
+      return getBikesByAddress($('#address').val());
+    });
+    getBikesByLatLong = function() {
+      var position;
+      if (navigator.geolocation) {
+        position = navigator.geolocation.getCurrentPosition();
+        return plotBikeRacks(parseFloat(position.coords.latitude.toFixed(6)), parseFloat(position.coords.longitude.toFixed(6)));
+      } else {
+        return alert('Geolocation is not supported by this browser.');
+      }
+    };
+    getBikesByAddress = function(address) {
+      return geoCodeAddress(address);
+    };
+    geoCodeAddress = function(address) {
+      return $.ajax({
+        url: '/home/getBikesByAddress',
+        data: {
+          address: address
+        },
+        success: function(data) {
+          return plotBikeRacks(data.responseJSON.results[0].geometry.location.lat, data.responseJSON.results[0].geometry.location.lng);
+        }
+      });
+    };
+    plotBikeRacks = function(latitude, longitude) {
+      $('#input-box').addClass('active');
+      bindReactive();
+      return queryDataPortal(latitude, longitude);
+    };
+    queryDataPortal = function(latitude, longitude) {
+      return $.ajax({
+        url: '/home/getBikesByLatLong',
+        data: {
+          lat: latitude,
+          long: longitude
+        },
+        success: function(data) {
+          return initGoogleMaps(latitude, longitude, data);
+        }
+      });
+    };
+    queryClientSideDataPortal = function(latitude, longitude, map) {
+      $.getJSON('http://data.cityofchicago.org/resource/cbyb-69xx.json?$select=location.longitude%2C%20location.latitude&$where=within_circle(location%2C%20' + latitude + '%2C%20' + longitude + '%2C%20322)', function(data) {
+        return mapMarkers(longitude, latitude, data, map);
+      });
+    };
+    initGoogleMaps = function(latitude, longitude, data) {
+      var map, mapOptions;
+      mapOptions = {
+        center: new google.maps.LatLng(latitude, longitude),
+        zoom: 17,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById('map-overwrite'), mapOptions);
+      mapMarkers(longitude, latitude, data, map, true);
+      google.maps.event.addListener(map, 'mouseup', function() {
+        var center;
+        center = map.getCenter();
+        latitude = center.lat();
+        longitude = center.lng();
+        queryClientSideDataPortal(latitude, longitude, map);
+        return true;
+      });
+      return true;
+    };
+    mapMarkers = function(longitude, latitude, data, map) {
+      var markerMe, me;
+      me = new google.maps.Marker({
+        position: new google.maps.LatLng(latitude, longitude),
+        title: 'My Location'
+      });
+      markerMe = me.setMap(map);
+      return $(data).each(function() {
+        var marker, markerBikes;
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(this.sub_col_location_latitude, this.sub_col_location_longitude),
+          title: 'Bike Rack',
+          icon: '/bike.png'
+        });
+        return markerBikes = marker.setMap(map);
+      });
+    };
+    return bindReactive = function() {
+      return $('#input-box.active').off('click').on('click', function() {
+        return $('#input-box.active').removeClass('active');
+      });
+    };
+  });
+
+  return;
+
+}).call(this);
+:ET

@@ -1,0 +1,31 @@
+<iframe id="map" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d23742.06796274641!2d<%= @long %>!3d<%= @lat %>!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1458684450421"></iframe>
+<div id="map-overwrite"></div>
+
+<div id="input-box">
+	<a id="LocationSubmit">
+		<svg version="1.1" id="gps" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		    viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;" xml:space="preserve">
+		    <style type="text/css">
+		        #gps .st0{fill:none;stroke:#000;stroke-miterlimit:10;}
+		        #gps .st1{fill:#000;}
+		    </style>
+		    <circle class="st0" cx="20.2" cy="19.8" r="18.1"/>
+		    <circle class="st1" cx="20.2" cy="3.1" r="1"/>
+		    <circle class="st1" cx="20.2" cy="36.5" r="1"/>
+		    <circle class="st1" cx="36.8" cy="19.8" r="1"/>
+		    <circle class="st1" cx="3.5" cy="19.8" r="1"/>
+		    <circle class="st1" cx="20.2" cy="19.8" r="1.9"/>
+		</svg>
+	</a>
+	<%= text_field_tag :address, nil, :placeholder => "Enter your address" %>
+	<a id="AddressSubmit">
+		<svg version="1.1" id="search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		        viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;" xml:space="preserve">
+		    <style type="text/css">
+		        #search .st0{fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:10;}
+		    </style>
+		    <circle class="st0" cx="24.3" cy="15.5" r="10.2"/>
+		    <rect x="13.9" y="23.4" transform="matrix(-0.8857 -0.4642 0.4642 -0.8857 15.2974 65.0694)" width="3.5" height="14.6"/>
+		</svg>
+	</a>
+</div>

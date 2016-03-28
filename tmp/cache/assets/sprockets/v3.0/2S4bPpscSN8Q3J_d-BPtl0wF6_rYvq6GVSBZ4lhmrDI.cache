@@ -1,0 +1,39 @@
+I"'(function() {
+  $(document).ready(function() {
+    var getBikes, plotBikeRacks, queryDataPortal;
+    $('#LocationSubmit').off('click').on('click', function() {
+      return getBikes();
+    });
+    getBikes = function() {
+      if (navigator.geolocation) {
+        return navigator.geolocation.getCurrentPosition(plotBikeRacks);
+      } else {
+        return alert('Geolocation is not supported by this browser.');
+      }
+    };
+    plotBikeRacks = function(position) {
+      var latitude, longitude;
+      latitude = parseFloat(position.coords.latitude.toFixed(6));
+      longitude = parseFloat(position.coords.longitude.toFixed(6));
+      return queryDataPortal(latitude, longitude);
+    };
+    return queryDataPortal = function(latitude, longitude) {
+      $('#input-box').addClass('active');
+      $.ajax;
+      return {
+        url: '/home/getBikes',
+        data: {
+          lat: latitude,
+          long: longitude
+        },
+        success: function(data) {
+          return console.log(data);
+        }
+      };
+    };
+  });
+
+  return;
+
+}).call(this);
+:ET
