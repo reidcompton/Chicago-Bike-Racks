@@ -13889,3 +13889,30 @@ Started GET "/assets/home.self-83098246fb035e04a08fd813051339975e5f5306048672f5a
 
 
 Started GET "/assets/application.self-3a3c8b61bda630ee689740ce7cbd0dd8ea6fdd45e2c42eef4661ab38cf268afe.js?body=1" for ::1 at 2016-03-28 16:10:25 -0500
+
+
+Started GET "/" for ::1 at 2016-03-28 16:23:52 -0500
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 647ms (Views: 624.9ms)
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2016-03-28 16:23:53 -0500
+
+
+Started GET "/assets/home.self-83098246fb035e04a08fd813051339975e5f5306048672f5abbf9e8489a98337.js?body=1" for ::1 at 2016-03-28 16:23:53 -0500
+
+
+Started GET "/assets/home.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-28 16:23:53 -0500
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-28 16:23:53 -0500
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-28 16:23:53 -0500
+
+
+Started GET "/assets/application.self-dad041cb9a331d2123d9422d60abacf497e4a45cde37b88085eae9e9c4fa5425.css?body=1" for ::1 at 2016-03-28 16:23:53 -0500
+
+
+Started GET "/assets/application.self-3a3c8b61bda630ee689740ce7cbd0dd8ea6fdd45e2c42eef4661ab38cf268afe.js?body=1" for ::1 at 2016-03-28 16:23:53 -0500
