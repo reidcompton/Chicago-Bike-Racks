@@ -56,7 +56,7 @@ $(document).ready ->
 				initGoogleMaps(latitude, longitude, data)
 
 	queryClientSideDataPortal = (latitude, longitude, map) ->
-		$.getJSON 'http://data.cityofchicago.org/resource/cbyb-69xx.json?$select=location.longitude%2C%20location.latitude&$where=within_circle(location%2C%20' + latitude + '%2C%20' + longitude + '%2C%20322)', (data) ->
+		$.getJSON 'https://data.cityofchicago.org/resource/cbyb-69xx.json?$select=location.longitude%2C%20location.latitude&$where=within_circle(location%2C%20' + latitude + '%2C%20' + longitude + '%2C%20322)', (data) ->
 				mapMarkers longitude, latitude, data, map
 		return
 
